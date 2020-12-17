@@ -16,7 +16,7 @@ public class AlgorithmsTest {
     public void quickSort() {
         int[] test = {31, 5, 8, 3, 5};
         int[] expect = {3, 5, 5, 8, 31};
-        Algorithms.quickSort(test);
+        Algorithms.quickSort(test, 0, test.length-1);
 
         assertArrayEquals("Mismatch: ", expect, test);
 

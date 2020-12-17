@@ -4,6 +4,25 @@ import java.util.*;
 
 public class Algorithms {
 
+    public static void main(String[] args) {
+        DirectedWeightedGraph uwg = new DirectedWeightedGraph();
+        uwg.addEdge(new Edge(5, "book", "record"));
+        uwg.addEdge(new Edge(0, "book", "poster"));
+        uwg.addEdge(new Edge(15, "record", "guitar"));
+        uwg.addEdge(new Edge(20, "guitar", "piano"));
+        uwg.addEdge(new Edge(35, "poster", "drums"));
+        uwg.addEdge(new Edge(10, "drums", "piano"));
+        uwg.addEdge(new Edge(30, "poster", "guitar"));
+        uwg.addEdge(new Edge(20, "record", "drums"));
+
+        System.out.println(uwg);
+        dijkstra(uwg);
+
+        Map map = new HashMap();
+
+
+    }
+
     static List<String> BFS(UndirectedGraph graph, String required, String started) {
         Map<String, List<String>> vertexMap = graph.getVertexMap();
         ArrayDeque<String> path = new ArrayDeque<>();
@@ -30,51 +49,45 @@ public class Algorithms {
 
         return new LinkedList<String>();
     }
-    // todo
-    static void quickSort(int[] arr) {
-        if (arr.length < 2)
+
+    static void quickSort(int[] arr, int start, int end) {
+//        if(arr.length < 2)
+//            return;
+
+        if(start >= end)
             return;
 
-        int middle = arr[arr.length / 2];
+        int middle = start +((end - start)/2);
+        int pivot = arr[middle];
 
-        int count = 0;
-        for (int element : arr)
-            if (element < middle)
-                count++;
+        int temp;
+        temp = arr[end];
+        arr[end] = arr[middle];
+        arr[middle] = temp;
 
-        int[] less = new int[count];
+        int i = start-1;
+        int j = end;
 
-        count = 0;
-        for (int element : arr)
-            if (element < middle)
-                less[count++] = element;
+        do {
+            do{i++;} while (arr[i] < pivot && i < end );
+            do{j--;} while (arr[j] > pivot && j>start);
 
-        count = 0;
-        for (int element : arr)
-            if (element > middle)
-                count++;
+            if(i < j) {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
 
-        int[] greater = new int[count];
+            }
+        } while (i < j);
 
-        count = 0;
-        for (int element : arr)
-            if (element > middle)
-                greater[count++] = element;
-
-        quickSort(less);
-        quickSort(greater);
-
-        count = 0;
-        for (int element : less) {
-            arr[count++] = element;
-        }
-
-        arr[count++] = middle;
+        temp = arr[end];
+        arr[end] = arr[i];
+        arr[i] = temp;
 
 
-        for (int element : greater) {
-            arr[count++] = element;
-        }
+        quickSort(arr, start, i - 1);
+        quickSort(arr, i + 1, end);
+
     }
 
     static int binarySearch(int[] arr, int required) {
@@ -134,5 +147,25 @@ public class Algorithms {
         }
         return index;
     }
-}
+
+    //todo
+    static void dijkstra(DirectedWeightedGraph dwg) {
+        Map<String, List<Edge>> map = dwg.getVertexMap();
+
+        Collection<List<Edge>> set = map.values();
+        Iterator<List<Edge>> iterator = set.iterator();
+
+        for(List<Edge> list : set) {
+            for(Edge edge : list){
+
+
+
+
+            }
+        }
+    }
+    }
+
+
+
 
